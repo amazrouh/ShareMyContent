@@ -88,7 +88,9 @@ public sealed class JwtTokenService(IOptions<JwtOptions> options)
                 },
                 out _);
 
-            var sub = principal.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            // Inbound JWT claim mapping maps "sub" to ClaimTypes.NameIdentifier.
+            var sub = principal.FindFirstValue(ClaimTypes.NameIdentifier)
+                ?? principal.FindFirstValue(JwtRegisteredClaimNames.Sub);
             var st = principal.FindFirstValue("share_token");
             if (sub is null || st != routeToken || !Guid.TryParse(sub, out shareLinkId))
                 return false;
