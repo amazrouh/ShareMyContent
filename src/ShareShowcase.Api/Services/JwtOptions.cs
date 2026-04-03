@@ -8,4 +8,9 @@ public sealed class JwtOptions
     public string Audience { get; set; } = "";
     public string SigningKey { get; set; } = "";
     public int ExpiryMinutes { get; set; } = 60;
+
+    /// <summary>Audience claim for short-lived tokens used to view password-protected shares.</summary>
+    public string ShareViewerAudience { get; set; } = "ShareShowcase.ShareViewer";
+
+    public int ShareViewerExpiryMinutes { get; set; } = 480;
 }
