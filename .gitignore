@@ -1,0 +1,23 @@
+# .NET
+bin/
+obj/
+out/
+*.user
+*.suo
+.vs/
+
+# Node / frontend
+node_modules/
+dist/
+*.log
+npm-debug.log*
+
+# Env (keep .env.example committed)
+.env
+.env.local
+.env.*.local
+
+# Local data / build scratch
+App_Data/
+artifacts/
+src/ShareShowcase.Api/App_Data/

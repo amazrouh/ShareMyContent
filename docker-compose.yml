@@ -1,0 +1,24 @@
+# Local PostgreSQL for Share Showcase API (same engine as production).
+# Usage: docker compose up -d
+# Connection string matches appsettings.Development.json in ShareShowcase.Api
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shareshowcase-postgres
+    environment:
+      POSTGRES_USER: shareshowcase
+      POSTGRES_PASSWORD: shareshowcase_dev
+      POSTGRES_DB: shareshowcase
+    ports:
+      - "5432:5432"
+    volumes:
+      - shareshowcase_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shareshowcase -d shareshowcase"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  shareshowcase_pgdata:

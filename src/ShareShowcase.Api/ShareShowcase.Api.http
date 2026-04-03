@@ -1,0 +1,43 @@
+@host = https://localhost:7194
+
+### Health (anonymous)
+GET {{host}}/api/v1/system/health
+Accept: application/json
+
+###
+
+### Register (anonymous) — then copy @token from response
+POST {{host}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "demo@example.com",
+  "password": "Password1"
+}
+
+###
+
+### Login (anonymous)
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo@example.com",
+  "password": "Password1"
+}
+
+###
+
+@token = paste_jwt_here
+
+### Me (authorized)
+GET {{host}}/api/v1/auth/me
+Authorization: Bearer {{token}}
+
+###
+
+### Folders
+GET {{host}}/api/v1/folders
+Authorization: Bearer {{token}}
+
+###
